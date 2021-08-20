@@ -20,5 +20,5 @@ async def on_startup(dispatcher):
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.create_task(insta_bot(1800))
+    loop.create_task(insta_bot(1000))
     executor.start_polling(dp, on_startup=on_startup)

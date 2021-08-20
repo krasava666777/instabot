@@ -9,6 +9,7 @@ async def set_default_commands(dp):
             types.BotCommand("add", "Добавить аккаунт"),
             types.BotCommand("add_list", "Добавить список аккаунтов"),
             types.BotCommand("get_users", "Вывести список аккаунтов"),
+            types.BotCommand("count", "Вывести количество аккаунтов"),
             types.BotCommand("remove", "Удалить аккаунт"),
         ]
     )

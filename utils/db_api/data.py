@@ -33,7 +33,7 @@ class Database:
         self.execute(sql, commit=True)
 
     def add_user(self, username: str):
-        sql = "INSERT  INTO users VALUES(?)"
+        sql = "INSERT or IGNORE INTO users VALUES(?)"
         parameters = [username]
         self.execute(sql, parameters=parameters, commit=True)
 
@@ -51,3 +51,7 @@ class Database:
         parameters = [username]
         info = self.execute(sql, parameters=parameters, fetchone=True)
         return info is not None
+
+    def count(self):
+        sql = "SELECT COUNT(*) as count FROM users"
+        return self.execute(sql, fetchone=True)

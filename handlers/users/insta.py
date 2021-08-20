@@ -10,18 +10,17 @@ async def insta_bot(wait_for):
         await asyncio.sleep(wait_for)
         us = [j for i in db.get_all_users() for j in i]
 
-        options = webdriver.FirefoxOptions()
-        options.set_headless(True)
-        browser = webdriver.Firefox(options=options)
+
+        browser = webdriver.Firefox()
         browser.get('https://www.instagram.com/')
-        await asyncio.sleep(180)
+        await asyncio.sleep(20)
         username_input = browser.find_element_by_css_selector("input[name='username']")
         password_input = browser.find_element_by_css_selector("input[name='password']")
         username_input.send_keys(insta_username)
         password_input.send_keys(insta_password)
         login_button = browser.find_element_by_xpath("//button[@type='submit']")
         login_button.click()
-        await asyncio.sleep(180)
+        await asyncio.sleep(30)
         try:
             activity_link = browser.find_element_by_css_selector("a._0ZPOP.kIKUG")
             activity_link.click()
@@ -29,7 +28,7 @@ async def insta_bot(wait_for):
             main_page = browser.window_handles[0]
             browser.switch_to.window(main_page)
             browser.close()
-        await asyncio.sleep(180)
+        await asyncio.sleep(20)
         try:
             but = browser.find_element_by_css_selector("button.sqdOP.yWX7d._8A5w5")
             but.click()
@@ -43,10 +42,8 @@ async def insta_bot(wait_for):
         for i, j, r in zip(names, confirm, delete):
             if i.text in us:
                 j.click()
-                await asyncio.sleep(3)
-            else:
-                r.click()
-                await asyncio.sleep(3)
+                await asyncio.sleep(1)
+
         main_page = browser.window_handles[0]
         browser.switch_to.window(main_page)
 

@@ -1,6 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
+import string
 
 
 from loader import dp, db
@@ -61,8 +62,14 @@ async def add_list(message: types.Message, state: FSMContext):
 async def give_list(message: types.Message, state: FSMContext):
     usr = message.text.split('\n')
     for i in usr:
-        db.add_user(i)
+        db.add_user(i.translate({ord(c): None for c in string.whitespace}))
     await message.answer("Все успешно добавлено")
     await state.reset_state()
+
+
+@dp.message_handler(Command('count'))
+async def count_users(message: types.Message):
+    await message.answer(f"Количество пользователей: {db.count()[0]}")
+
 
 
